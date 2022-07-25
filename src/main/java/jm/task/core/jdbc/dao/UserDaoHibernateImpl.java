@@ -6,18 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private final static String sqlCommandCreate = "CREATE TABLE IF NOT EXISTS users (id bigint, " +
-            "name varchar(100), lastName varchar(100), age tinyint)";
-    private final static String sqlCommandAddNew = "INSERT INTO users (id, name, lastName, age) VALUES (?,?,?,?)";
-    private final static String sqlCommandDrop = "DROP TABLE IF EXISTS users;";
-    private final static String sqlCommandGetAll = "SELECT * FROM users";
-    private final static String sqlCommandTruncate = "TRUNCATE TABLE users";
-    private final static String sqlCommandDeleteWhere = "DELETE FROM users WHERE id = ";
+    private final static String sqlTableCreate =
+            "CREATE TABLE IF NOT EXISTS users" +
+                    "(id bigint not null auto_increment, " +
+                    "name varchar(50), " +
+                    "lastName varchar(50), " +
+                    "age tinyint, " +
+                    "PRIMARY KEY (id))";
+    private final static String sqlTableDrop = "DROP TABLE IF EXISTS users;";
+    private final static String sqlTableClean = "TRUNCATE TABLE users";
     private static Transaction transaction = null;
 
     public UserDaoHibernateImpl() {
@@ -29,10 +30,8 @@ public class UserDaoHibernateImpl implements UserDao {
     public void createUsersTable() {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery(sqlCommandDrop).executeUpdate();
-            session.createSQLQuery(sqlCommandCreate).executeUpdate();
+            session.createSQLQuery(sqlTableCreate).executeUpdate();
             transaction.commit();
-            System.out.println("таблица создана");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -42,26 +41,68 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.createSQLQuery(sqlTableDrop).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(new User(name, lastName, age));
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     @Override
     public void removeUserById(long id) {
-
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(session.get(User.class, id));
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> users = new ArrayList<>();
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            users = (List<User>) session.createQuery("From User").getResultList();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return users;
     }
 
     @Override
     public void cleanUsersTable() {
-
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.createSQLQuery(sqlTableClean).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 }

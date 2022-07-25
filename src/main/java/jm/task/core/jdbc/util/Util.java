@@ -14,14 +14,15 @@ import java.util.Properties;
 public class Util {
     // реализуйте настройку соеденения с БД
     private static SessionFactory sessionFactory;
-    private static final String Connection_Url = "jdbc:mysql://localhost:3306/test";
+    private static final String Url = "jdbc:mysql://localhost:3306/test?" +
+            "&serverTimeZone=Europe/Moscow&useSSL=false&allowPublicKeyRetrieval=true";
     private static final String User_Name = "ivan";
     private static final String Password = "$@fxml5586&%DF";
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(Connection_Url, User_Name, Password);
+            connection = DriverManager.getConnection(Url, User_Name, Password);
             connection.setAutoCommit(false);
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,7 +36,7 @@ public class Util {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, Connection_Url);
+                settings.put(Environment.URL, Url);
                 settings.put(Environment.USER, User_Name);
                 settings.put(Environment.PASS, Password);
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
