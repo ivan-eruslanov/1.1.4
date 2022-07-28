@@ -19,11 +19,11 @@ public class Util {
     private static final String User_Name = "ivan";
     private static final String Password = "$@fxml5586&%DF";
 
+    private static Connection connection;
+
     public static Connection getConnection() {
-        Connection connection = null;
         try {
             connection = DriverManager.getConnection(Url, User_Name, Password);
-            connection.setAutoCommit(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,9 +40,9 @@ public class Util {
                 settings.put(Environment.USER, User_Name);
                 settings.put(Environment.PASS, Password);
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-                settings.put(Environment.SHOW_SQL, "true");
+                settings.put(Environment.SHOW_SQL, "false");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
