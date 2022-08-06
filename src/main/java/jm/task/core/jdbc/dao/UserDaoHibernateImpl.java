@@ -17,15 +17,15 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void createUsersTable() {
         Transaction transaction = null;
-        String sql = "CREATE TABLE IF NOT EXISTS `test`.`User`" +
-                        "(id bigint not null auto_increment, " +
-                        "name varchar(50), " +
-                        "lastName varchar(50), " +
-                        "age tinyint, " +
-                        "PRIMARY KEY (id))";
+        String hql = """
+                    create table if not exists `test`.`User`
+                    (id bigint auto_increment primary key ,
+                    name varchar(50) not null ,
+                    lastName varchar(50) not null ,
+                    age tinyint)""";
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery(sql).executeUpdate();
+            session.createSQLQuery(hql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -37,9 +37,10 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         Transaction transaction = null;
+        String hql = "drop table if exists `test`.`User`";
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery("DROP TABLE IF EXISTS `test`.`User`").executeUpdate();
+            session.createSQLQuery(hql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -96,9 +97,10 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void cleanUsersTable() {
         Transaction transaction = null;
+        String hql = "delete from User";
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery("TRUNCATE TABLE `test`.`User`").executeUpdate();
+            session.createQuery(hql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

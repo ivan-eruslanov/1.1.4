@@ -14,20 +14,18 @@ import java.util.Properties;
 public class Util {
     // реализуйте настройку соеденения с БД
     private static SessionFactory sessionFactory;
-    private static final String Url = "jdbc:mysql://localhost:3306/test?" +
+    private static final String url = "jdbc:mysql://localhost:3306/test?" +
             "&serverTimeZone=Europe/Moscow&useSSL=false&allowPublicKeyRetrieval=true";
-    private static final String User_Name = "ivan";
-    private static final String Password = "$@fxml5586&%DF";
-
-    private static Connection connection;
+    private static final String user = "ivan";
+    private static final String password = "$@fxml5586&%DF";
 
     public static Connection getConnection() {
         try {
-            connection = DriverManager.getConnection(Url, User_Name, Password);
+            return DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return connection;
+        return null;
     }
 
     public static SessionFactory getSessionFactory() {
@@ -36,9 +34,9 @@ public class Util {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, Url);
-                settings.put(Environment.USER, User_Name);
-                settings.put(Environment.PASS, Password);
+                settings.put(Environment.URL, url);
+                settings.put(Environment.USER, user);
+                settings.put(Environment.PASS, password);
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
                 settings.put(Environment.SHOW_SQL, "false");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
