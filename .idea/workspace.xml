@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6412ea1d-367f-4624-8f88-febf69455c23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/586b5ccc-503f-4f1e-aaa9-b3f263e08d72.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/586b5ccc-503f-4f1e-aaa9-b3f263e08d72/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/586b5ccc-503f-4f1e-aaa9-b3f263e08d72/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/586b5ccc-503f-4f1e-aaa9-b3f263e08d72/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/586b5ccc-503f-4f1e-aaa9-b3f263e08d72/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDaoHibernateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDaoHibernateImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/model/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="6412ea1d-367f-4624-8f88-febf69455c23" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,6 +117,7 @@
       <workItem from="1659037296507" duration="178000" />
       <workItem from="1659044436837" duration="2573000" />
       <workItem from="1659806434388" duration="1323000" />
+      <workItem from="1659859332658" duration="244000" />
     </task>
     <servers />
   </component>

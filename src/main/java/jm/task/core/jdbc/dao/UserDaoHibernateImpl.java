@@ -18,7 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void createUsersTable() {
         Transaction transaction = null;
         String hql = """
-                    create table if not exists `test`.`User`
+                    create table `test`.`User`
                     (id bigint auto_increment primary key ,
                     name varchar(50) not null ,
                     lastName varchar(50) not null ,
