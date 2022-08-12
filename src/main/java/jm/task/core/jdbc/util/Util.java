@@ -16,8 +16,8 @@ public class Util {
     private static SessionFactory sessionFactory;
     private static final String url = "jdbc:mysql://localhost:3306/test?" +
             "&serverTimeZone=Europe/Moscow&useSSL=false&allowPublicKeyRetrieval=true";
-    private static final String user = "ivan";
-    private static final String password = "$@fxml5586&%DF";
+    private static final String user = "root";
+    private static final String password = "root";
 
     public static Connection getConnection() {
         try {
